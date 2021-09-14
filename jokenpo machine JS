@@ -1,0 +1,61 @@
+let readlineSync = require('readline-sync');
+let input = (text="") => readlineSync.question(text);
+let print = (text="", end="\n") => process.stdout.write("" + text + end);
+let rand_int = (min, max) => parseInt((Math.random() * (max - min + 1) + min));
+
+
+
+function verificar_ganhador(opcaoJ, opcaoM) {
+  if(opcaoJ === opcaoM) {
+    return "E";
+  } else if((opcaoJ === 1 && opcaoM === 3) || 
+           (opcaoJ === 2 && opcaoM === 1) || 
+           (opcaoJ === 3 && opcaoM === 2)) {
+    return "J";
+  } else {
+    return "M";
+  }
+}
+
+function terminou(contadorM, contadorJ){
+  if(contadorM == 3){
+    print("kkkkkkperdeu");
+    return true;
+  }
+  if(contadorJ == 3){
+    print("ganhou vc eh bom");
+    return true;
+  }
+  return false;
+}
+
+function jogar() {
+  let pontos = [];
+  let contadorJ = 0;
+  let contadorM = 0;
+
+  while(true){
+    print("Digite 1 para pedra, 2 para papel ou 3 para tesoura");
+
+    let opcaoJ = Number(input());
+    let opcaoM = rand_int(1, 3);
+
+    print("Voce escolheu " + opcaoJ);
+    print("A máquina mostrou " + opcaoM);
+
+    let res = verificar_ganhador(opcaoJ, opcaoM);
+    pontos.push(res);
+    if(res == "J") {
+      print("voce ganhou");
+      contadorJ++;
+    } else if (res == "M") {
+      print("maquina ganhou");
+      contadorM++;
+    } else{
+      print("empate");
+    }
+
+    if(terminou(contadorM, contadorJ))
+      break;
+  }
+}
