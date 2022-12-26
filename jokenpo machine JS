@@ -1,3 +1,4 @@
+~~~javascript
 let readlineSync = require('readline-sync');
 let input = (text="") => readlineSync.question(text);
 let print = (text="", end="\n") => process.stdout.write("" + text + end);
@@ -58,4 +59,4 @@ function jogar() {
     if(terminou(contadorM, contadorJ))
       break;
   }
-}
+}~~~
